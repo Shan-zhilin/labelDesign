@@ -8,9 +8,7 @@
     vertical-align: middle;
     white-space: nowrap;
     border: $border-width solid transparent;
-    padding: $btn-padding-x $btn-padding-y;
-    font-size: $btn-font-size;
-    border-radius: $btn-border-radius;
+    @include button-size($btn-padding-y,$btn-padding-x,$btn-font-size, $btn-border-radius);
     transition: $btn-transition;
     background-image: none;
     cursor: pointer;
@@ -23,4 +21,12 @@
             pointer-events: none;
         }   
     }
+}
+
+.btn-lg {
+    @include button-size($btn-padding-y-lg,$btn-padding-x-lg,$btn-font-size-lg, $btn-border-radius-lg);
+}
+
+.btn-sm {
+    @include button-size($btn-padding-y-sm,$btn-padding-x-sm,$btn-font-size-sm, $btn-border-radius-sm);
 }

@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-10-10 23:04:24
+ * @LastEditTime: 2021-10-11 00:14:26
  */
 import React from "react";
 import "./style/index.scss";
@@ -19,7 +19,13 @@ function App() {
         <hr />
         <Button>hello</Button>
         <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
-          Hello 2
+          disabled
+        </Button>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+          large
+        </Button>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>
+          small
         </Button>
         <Button btnType={ButtonType.Link} href="https://www.baidu.com" disabled>
           连接

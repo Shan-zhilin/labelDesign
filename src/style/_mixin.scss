@@ -1,0 +1,6 @@
+// mixin 得作用是 避免相同代码重复书写
+@mixin button-size($padding-y,$padding-x,$font-size,$boder-radius) {
+    padding: $padding-y $padding-y;
+    font-size: $font-size;
+    border-radius: $boder-radius;
+}

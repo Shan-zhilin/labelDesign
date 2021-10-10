@@ -2,11 +2,12 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 16:13:51
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-10-10 23:51:25
+ * @LastEditTime: 2021-10-11 00:16:31
  */
 import React from "react";
 import classNames from "classnames";
 
+// 枚举类型 定义btnSize
 export enum ButtonSize {
   Large = "lg",
   Small = "sm",
