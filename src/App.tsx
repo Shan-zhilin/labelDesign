@@ -1,23 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/*
+ * @Author: shanzhilin
+ * @Date: 2021-10-09 14:54:07
+ * @LastEditors: shanzhilin
+ * @LastEditTime: 2021-10-10 23:04:24
+ */
+import React from "react";
+import "./style/index.scss";
+import Button, { ButtonSize, ButtonType } from "./components/Button/button";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>biaff</h1>
+        <h2>biaff</h2>
+        <h3>biaff</h3>
+        <br />
+        <hr />
+        <Button>hello</Button>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
+          Hello 2
+        </Button>
+        <Button btnType={ButtonType.Link} href="https://www.baidu.com" disabled>
+          连接
+        </Button>
       </header>
     </div>
   );

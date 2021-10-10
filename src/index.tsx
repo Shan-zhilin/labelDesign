@@ -1,6 +1,12 @@
+/*
+ * @Author: shanzhilin
+ * @Date: 2021-10-09 14:54:07
+ * @LastEditors: shanzhilin
+ * @LastEditTime: 2021-10-09 16:05:23
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './style/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
