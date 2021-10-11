@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-10-11 00:14:26
+ * @LastEditTime: 2021-10-11 23:37:12
  */
 import React from "react";
 import "./style/index.scss";
@@ -12,23 +12,30 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>biaff</h1>
-        <h2>biaff</h2>
-        <h3>biaff</h3>
-        <br />
-        <hr />
-        <Button>hello</Button>
+        <Button>普通</Button>
         <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
           disabled
         </Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
-          large
+        <Button btnType={ButtonType.Success} size={ButtonSize.Large}>
+          success
         </Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>
-          small
+        <Button
+          btnType={ButtonType.Warning}
+          size={ButtonSize.Large}
+        >
+          warning
+        </Button>
+        <Button
+          btnType={ButtonType.Info}
+          size={ButtonSize.Large}
+        >
+          info
+        </Button>
+        <Button btnType={ButtonType.Link} href="https://www.baidu.com">
+          普通连接
         </Button>
         <Button btnType={ButtonType.Link} href="https://www.baidu.com" disabled>
-          连接
+          禁用连接
         </Button>
       </header>
     </div>

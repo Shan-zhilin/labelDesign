@@ -30,3 +30,50 @@
 .btn-sm {
     @include button-size($btn-padding-y-sm,$btn-padding-x-sm,$btn-font-size-sm, $btn-border-radius-sm);
 }
+
+.btn-primary {
+    @include button-style($primary,$primary,$white)
+}
+
+.btn-danger {
+    @include button-style($danger,$danger,$white)
+}
+
+.btn-success {
+    @include button-style($success,$success,$white)
+}
+
+.btn-warning {
+    @include button-style($warning,$warning,$white)
+}
+
+.btn-info {
+    @include button-style($info,$info,$white)
+}
+
+.btn-default {
+    @include button-style($white,$gray-400,$body-color,$white,$primary,$primary)
+}
+
+.btn-link {
+    color: $btn-link-color;
+    text-decoration: $link-decoration;
+    font-weight: $font-weight-normal;
+    box-shadow: none;
+
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+    }
+
+    &:focus,
+    &.focus {
+        text-decoration: $link-hover-decoration;
+        box-shadow: none;
+    }
+
+    &.disabled {
+        color: $btn-link-disabled-color;
+        pointer-events: none;
+    }
+}

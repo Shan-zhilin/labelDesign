@@ -1,6 +1,39 @@
 // mixin 得作用是 避免相同代码重复书写
+
+// 按钮尺寸
 @mixin button-size($padding-y,$padding-x,$font-size,$boder-radius) {
-    padding: $padding-y $padding-y;
+    padding: $padding-y $padding-x;
     font-size: $font-size;
     border-radius: $boder-radius;
+}
+
+// 按钮颜色
+@mixin button-style (
+    $background,
+    $border,
+    $color,
+    $hover-background: lighten($background,7.5%),
+    $hover-border: lighten($border, 10%),
+    $hover-color: $color
+) {
+    color: $color;
+    border-color: $border;
+    background: $background;
+    &:hover {
+        border-color: $hover-border;
+        color: $hover-color;
+        background: $hover-background;
+    }
+    &:focus,
+    &.focus {
+        border-color: $hover-border;
+        color: $hover-color;
+        background: $hover-background;
+    }
+    &:disabled,
+    &.disabled {
+      color: $color;
+      background: $background;
+      border-color: $border;    
+    }
 }
