@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-10-11 23:37:12
+ * @LastEditTime: 2021-10-15 22:48:05
  */
 import React from "react";
 import "./style/index.scss";
@@ -12,11 +12,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button>普通</Button>
+        <Button autoFocus>普通</Button>
         <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
           disabled
         </Button>
-        <Button btnType={ButtonType.Success} size={ButtonSize.Large}>
+        <Button btnType={ButtonType.Success} size={ButtonSize.Large} onClick={() => {alert(111)}}>
           success
         </Button>
         <Button

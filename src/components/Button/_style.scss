@@ -32,27 +32,30 @@
 }
 
 .btn-primary {
-    @include button-style($primary,$primary,$white)
+    @include button-style($primary,$primary,$white);
 }
 
 .btn-danger {
-    @include button-style($danger,$danger,$white)
+    @include button-style($danger,$danger,$white);
 }
 
 .btn-success {
-    @include button-style($success,$success,$white)
+    @include button-style($success,$success,$white);
 }
 
 .btn-warning {
-    @include button-style($warning,$warning,$white)
+    @include button-style($warning,$warning,$white);
 }
 
 .btn-info {
-    @include button-style($info,$info,$white)
+    @include button-style($info,$info,$white);
 }
 
 .btn-default {
-    @include button-style($white,$gray-400,$body-color,$white,$primary,$primary)
+    @include button-style($white,$gray-400,$body-color,$white,$primary,$primary);
+    &[focus] {
+        border-color: $gray-400;
+    }
 }
 
 .btn-link {
