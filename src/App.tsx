@@ -7,11 +7,18 @@
 import React from "react";
 import "./style/index.scss";
 import Button, { ButtonSize, ButtonType } from "./components/Button/button";
+import Menu from "./components/Menu/Menu";
+import MenuItem from "./components/Menu/MenuItem";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Menu defaultIndex={0}>
+          <MenuItem>coll pink</MenuItem>
+          <MenuItem>coll pink1</MenuItem>
+          <MenuItem>coll pink2</MenuItem>
+        </Menu>
         <Button autoFocus>普通</Button>
         <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
           disabled

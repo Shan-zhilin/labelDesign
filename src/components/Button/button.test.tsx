@@ -5,14 +5,14 @@ import Button, { ButtonType } from "./button";
 describe("test button component", () => {
   it("should render the corrent component based on different props", () => {
     render(
-      <Button data-testid="button-success" btnType={ButtonType.Success}>
+      <Button data-testid="button-type" btnType={ButtonType.Info}>
         Success
       </Button>
     );
-    const element = screen.getByTestId("button-success");
+    const element = screen.getByTestId("button-type");
     expect(element).toBeInTheDocument();
     expect(element.tagName).toEqual("BUTTON");
-    expect(element).toHaveClass('btn btn-success')
+    expect(element).toHaveClass('btn btn-info')
   });
 
   it("should render a link when btnType equals link and href is provided", () => {
