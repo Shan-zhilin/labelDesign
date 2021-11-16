@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-14 23:49:58
+ * @LastEditTime: 2021-11-16 23:12:52
  */
 import React from "react";
 import "./style/index.scss";
@@ -16,11 +16,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Menu
-          defaultIndex={0}
+          defaultIndex='0'
           onSelect={(index) => {
             alert(index);
           }}
           mode="vertical"
+          defaultOpenSubmenus={['3']}
         >
           <MenuItem>coll pink</MenuItem>
           <MenuItem disabled>coll pink1</MenuItem>

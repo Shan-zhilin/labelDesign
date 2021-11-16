@@ -34,6 +34,7 @@
 }
 // 下拉菜单容器样式
 .submenu {
+    display: none;
     position: absolute;
     top: 110%;
     list-style: none;
@@ -61,8 +62,9 @@
         }
     }
 }
-
-
+.submenu.submenu-open {
+    display: block;
+}
 
 .menu-vertical {
     flex-direction: column;
@@ -80,7 +82,7 @@
         border-left: $menu-item-active-border-width solid transparent;
         &.is-active,&:hover {
             color: $menu-item-active-color;
-            border-bottom: 0px;
+            border-bottom: none;
             border-left: $menu-item-active-border-width solid $menu-item-active-color;
         }
     }
