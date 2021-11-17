@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-11-05 20:27:28
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-17 00:11:14
+ * @LastEditTime: 2021-11-17 23:38:40
  */
 import React from "react";
 import {
@@ -106,6 +106,11 @@ describe("test menu and menuItem component", () => {
     await waitFor(() => {
        expect(wrapper.queryByText('drop1')).toBeVisible()
     })
-   
+    fireEvent.click(wrapper.getByText('drop1'))
+    expect(testProps.onSelect).toHaveBeenCalledWith('3-0')
+    fireEvent.mouseLeave(dropdown)
+    await waitFor(() => {
+      expect(wrapper.queryByText('drop1')).not.toBeVisible()
+   })
   })
 });
