@@ -2,25 +2,33 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-16 23:12:52
+ * @LastEditTime: 2021-11-27 00:06:26
  */
 import React from "react";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import "./style/index.scss";
 import Button, { ButtonSize, ButtonType } from "./components/Button/button";
 import Menu from "./components/Menu/Menu";
 import MenuItem from "./components/Menu/MenuItem";
 import SubMenu from "./components/Menu/SubMenu";
+import Icon from './components/Icon/icon'
+
+library.add(fas)
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+      <FontAwesomeIcon icon="check-square" />
+      <Icon icon="coffee" size='10x'  theme="primary"/>
         <Menu
           defaultIndex='0'
           onSelect={(index) => {
             alert(index);
           }}
-          mode="vertical"
+          mode="horizontal"
           defaultOpenSubmenus={['3']}
         >
           <MenuItem>coll pink</MenuItem>
