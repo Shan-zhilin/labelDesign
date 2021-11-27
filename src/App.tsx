@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-27 14:45:06
+ * @LastEditTime: 2021-11-27 15:09:11
  */
 import React from "react";
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -28,7 +28,7 @@ function App() {
           onSelect={(index) => {
             alert(index);
           }}
-          mode="vertical"
+          mode="horizontal"
           defaultOpenSubmenus={['3']}
         >
           <MenuItem>coll pink</MenuItem>

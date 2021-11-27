@@ -1,11 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Button, { ButtonType } from "./button";
+import Button from "./button";
 
 describe("test button component", () => {
   it("should render the corrent component based on different props", () => {
     render(
-      <Button data-testid="button-type" btnType={ButtonType.Info}>
+      <Button data-testid="button-type" btnType='info'>
         Success
       </Button>
     );
@@ -17,7 +17,7 @@ describe("test button component", () => {
 
   it("should render a link when btnType equals link and href is provided", () => {
     render(
-      <Button btnType={ButtonType.Link} data-testid="button-link">
+      <Button btnType='link' data-testid="button-link">
         禁用连接
       </Button>
     );
@@ -28,7 +28,7 @@ describe("test button component", () => {
 
   it("should render button with disabled", () => {
     render(
-      <Button btnType={ButtonType.Primary} data-testid="button-disabled" disabled>
+      <Button btnType='primary' data-testid="button-disabled" disabled>
         Disabled
       </Button>
     );
