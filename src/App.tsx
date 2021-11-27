@@ -2,9 +2,9 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-27 15:09:11
+ * @LastEditTime: 2021-11-27 21:58:13
  */
-import React from "react";
+import React,{useState} from "react";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -14,10 +14,12 @@ import Menu from "./components/Menu/Menu";
 import MenuItem from "./components/Menu/MenuItem";
 import SubMenu from "./components/Menu/SubMenu";
 import Icon from './components/Icon/icon'
+import Transition from './components/Transition/transition'
 
 library.add(fas)
 
 function App() {
+  const [show,setShow] = useState(false)
   return (
     <div className="App">
       <header className="App-header">
@@ -39,6 +41,33 @@ function App() {
             <MenuItem>coll pink3</MenuItem>
           </SubMenu>
         </Menu>
+        <Button onClick={() => {setShow(!show)}}>toogle</Button>
+        <Transition
+          in={show}
+          timeout={600}
+          animation="zoom-in-left"
+          addEndListener={() => {}}
+          children={
+            <div>
+                <p>test1</p>
+                <p>test2</p>
+                <p>test3</p>
+                <p>test4</p>
+                <p>test5</p>
+            </div>
+          }
+        
+        />
+         <Transition
+          in={show}
+          timeout={600}
+          animation="zoom-in-left"
+          wrapper
+          addEndListener={() => {}}
+          children={
+            <Button size="lg" btnType="success">test</Button>
+          }
+        />
         {/* <Button autoFocus>普通</Button>
         <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
           disabled
