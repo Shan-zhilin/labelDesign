@@ -4,7 +4,7 @@
  * @LastEditors: shanzhilin
  * @LastEditTime: 2021-11-27 17:07:26
  */
-import React, { CSSProperties } from "react";
+import React, { CSSProperties,FC } from "react";
 import classNames from "classnames";
 
 // 枚举类型 定义btnSize
@@ -21,12 +21,19 @@ export type ButtonType =
  "disabled"
 
 interface BaseButtonProps {
+  /** 自定义类名 */
   className?: string;
+  /** 禁用属性 */
   disabled?: boolean;
+  /** 按钮尺寸 */
   size?: ButtonSize;
+  /** 按钮类型 */
   btnType?: ButtonType;
+  /** 链接按钮 href 属性 */
   href?: string;
+  /** 按钮子元素 */
   children: React.ReactNode;
+  /** 自定义样式 */
   style?: CSSProperties;
 }
 
@@ -37,7 +44,7 @@ type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElemen
 // ts 映射类型 Partial将传入得类型属性统一变成可选的 因为a连接和button按钮拥有不一样的属性类型，所以需要将合并的类型属性设为可选
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
-const Button: React.FC<ButtonProps> = (props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const { className, disabled, size, btnType, href, children, style,...restProps } = props;
   // 类名
   const classes = classNames("btn",className, {
