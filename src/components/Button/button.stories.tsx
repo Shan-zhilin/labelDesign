@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-11-30 17:04:50
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-30 21:07:51
+ * @LastEditTime: 2021-12-01 22:19:43
  */
 // Button.stories.ts|tsx
 
@@ -59,12 +59,10 @@ export default {
       control: 'object'
     }
   },
-
 } as ComponentMeta<typeof Button>;
 
 //👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
-
 // 按钮主题
 export const Primary = Template.bind({});
 Primary.args = {

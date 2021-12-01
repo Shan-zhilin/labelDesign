@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-11-01 22:21:04
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-16 23:14:31
+ * @LastEditTime: 2021-12-01 22:30:57
  */
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
@@ -11,11 +11,17 @@ import {MenuItemProps} from './MenuItem'
 type MenuMode = "horizontal" | "vertical";
 type SelectCallback = (selectIndex: string) => void;
 export interface MenuProps {
+  /**默认选中*/
   defaultIndex?: string;
+  /**自定义类名 */
   className?: string;
+  /**Menu展示方向*/ 
   mode?: MenuMode;
+  /**自定义样式*/ 
   style?: React.CSSProperties;
+  /**选择切换事件*/ 
   onSelect?: SelectCallback;
+  /**下拉菜单默认展开*/ 
   defaultOpenSubmenus?: string[]
 }
 interface ImenuContext {
@@ -28,7 +34,13 @@ interface ImenuContext {
 // context 容器
 export const MenuContext = createContext<ImenuContext>({ index: '0' });
 
-const Menu: React.FC<MenuProps> = (props) => {
+/**
+ * ### 引用方式
+ * `
+ * import Menu from 'labelDesign'
+ * `
+*/
+export const Menu: React.FC<MenuProps> = (props) => {
   const { className, mode, style, defaultIndex, onSelect, children,defaultOpenSubmenus } = props;
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames("menu", className, {
