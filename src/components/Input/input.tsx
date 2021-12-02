@@ -41,7 +41,7 @@ export const Input: React.FC<inputProps> = (props) => {
   return (
     <div className={classes} style={style}>
       {prepand && <div className="input-group-prepend-content">{prepand}</div>}
-      {icon && (
+      {icon && !append && (
         <div className="icon-wrapper">
           <Icon icon={icon} />
         </div>
