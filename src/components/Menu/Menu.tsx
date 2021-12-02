@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-11-01 22:21:04
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-01 22:30:57
+ * @LastEditTime: 2021-12-03 00:09:36
  */
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
@@ -35,10 +35,9 @@ interface ImenuContext {
 export const MenuContext = createContext<ImenuContext>({ index: '0' });
 
 /**
- * ### 引用方式
- * `
- * import Menu from 'labelDesign'
- * `
+ *> ## **引用方式**
+ * **import Menu from 'labelDesign'**
+ * 
 */
 export const Menu: React.FC<MenuProps> = (props) => {
   const { className, mode, style, defaultIndex, onSelect, children,defaultOpenSubmenus } = props;

@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 16:13:51
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-11-27 17:07:26
+ * @LastEditTime: 2021-12-03 00:10:17
  */
 import React, { CSSProperties,FC } from "react";
 import classNames from "classnames";
@@ -44,6 +44,11 @@ type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElemen
 // ts 映射类型 Partial将传入得类型属性统一变成可选的 因为a连接和button按钮拥有不一样的属性类型，所以需要将合并的类型属性设为可选
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
+/**
+ *> ## **引用方式**
+ * **import Button from 'labelDesign'**
+ * 
+*/
 export const Button: FC<ButtonProps> = (props) => {
   const { className, disabled, size, btnType, href, children, style,...restProps } = props;
   // 类名

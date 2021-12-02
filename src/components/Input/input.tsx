@@ -2,17 +2,17 @@
  * @Author: shanzhilin
  * @Date: 2021-12-01 22:36:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-02 23:26:52
+ * @LastEditTime: 2021-12-03 00:37:23
  */
-import React, { ReactElement, InputHTMLAttributes, CSSProperties } from "react";
+import React, { ReactElement, InputHTMLAttributes, CSSProperties,FC } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import classNames from "classnames";
 import Icon from "../Icon/icon";
 
 type InputSize = "lg" | "sm";
-export interface inputProps
+export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
-  /**是否禁用*/
+  /** 是否禁用 */
   disabled?: boolean;
   /**Input大小 lg 或者 sm*/
   size?: InputSize;
@@ -26,7 +26,12 @@ export interface inputProps
   style?: CSSProperties;
 }
 
-export const Input: React.FC<inputProps> = (props) => {
+/**
+ *> ## **引用方式**
+ * **import Input from 'labelDesign'**
+ * 
+*/
+export const Input: FC<InputProps> = (props) => {
   // 取出所有属性
   const { disabled, size, icon, prepand, append, style, ...restProps } = props;
   // 计算className
@@ -55,4 +60,5 @@ export const Input: React.FC<inputProps> = (props) => {
 Input.defaultProps = {
   disabled: false,
 };
+
 export default Input;
