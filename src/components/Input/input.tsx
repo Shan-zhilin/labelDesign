@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-12-01 22:36:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-02 00:00:44
+ * @LastEditTime: 2021-12-02 23:26:52
  */
 import React, { ReactElement, InputHTMLAttributes, CSSProperties } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -29,7 +29,6 @@ export interface inputProps
 export const Input: React.FC<inputProps> = (props) => {
   // 取出所有属性
   const { disabled, size, icon, prepand, append, style, ...restProps } = props;
-
   // 计算className
   const classes = classNames("input-wrapper", {
     [`input-size-${size}`]: size,
@@ -48,6 +47,7 @@ export const Input: React.FC<inputProps> = (props) => {
         </div>
       )}
       <input className="input-inner" disabled={disabled} {...restProps} />
+      {append && <div className="input-group-append-content">{append}</div>}
     </div>
   );
 };
