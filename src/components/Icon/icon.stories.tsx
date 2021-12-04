@@ -39,8 +39,8 @@ const ListTemplate: ComponentStory<typeof Icon> = (args) => {
   const items = children as Array<IconProps>;
   return (
     <>
-      {items.map((item: IconProps) => (
-        <Icon {...item} />
+      {items.map((item: IconProps,index:number) => (
+        <Icon {...item} key={index}/>
       ))}
     </>
   );

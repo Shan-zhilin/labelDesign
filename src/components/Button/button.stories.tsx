@@ -5,8 +5,6 @@
  * @LastEditTime: 2021-12-01 22:19:43
  */
 // Button.stories.ts|tsx
-
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Button from "./button";
 

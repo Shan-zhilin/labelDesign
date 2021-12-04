@@ -42,6 +42,16 @@ export const Input: FC<InputProps> = (props) => {
     "input-group-append": !!append,
     "input-group-prepend": !!prepand,
   });
+  const fixControlledValue = (value:any) => {
+    if (typeof value === 'undefined' || value === null) {
+      return ''
+    }
+    return value
+  }
+  if ('value' in props) {
+    delete restProps.defaultValue
+    restProps.value = fixControlledValue(props.value)
+  }
 
   return (
     <div className={classes} style={style}>
