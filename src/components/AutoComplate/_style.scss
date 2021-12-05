@@ -1,4 +1,43 @@
-.item-heighLighted {
-    background-color: $primary;
-    color: $white;
+.auto-complete-content {
+    position: relative;
+}
+
+.auto-complete-list {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    list-style: none;
+    padding-left: 0;
+    white-space: nowrap;
+    background: #fff;
+    z-index: 100;
+    border: $border-width solid $border-color;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+
+}
+
+.auto-complete-content .suggestion-loading-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-base;
+    min-height: 75px;
+}
+
+.auto-complete-list .auto-complete-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    -webkit-transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    color: #212529;
+
+    &.is-active {
+        background: #0d6efd !important;
+        color: #fff !important;
+    }
+
+    &:hover {
+        color: #0d6efd !important;
+    }
 }

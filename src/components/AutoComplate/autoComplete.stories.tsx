@@ -110,20 +110,11 @@ const handleGitHub = (query: string) => {
 }
 
 // 自定义模板
-const renderOption = (item: DataSourceType<LakerPlayerProps>) => {
-  return (
-    <>
-      <h2>name {item.value}</h2>
-      <p>number {item.number}</p>
-    </>
-  );
-};
-
 const renderGithubOption = (item:DataSourceType<GitHubProps>) =>{
   return (
     <>
-      <h2>name {item.login}</h2>
-      <p>url: {item.url}</p>
+      <h4>name {item.login}</h4>
+      <h4>url: {item.url}</h4>
     </>
   );
 }
@@ -135,5 +126,12 @@ const Template: ComponentStory<typeof AutoComplete> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   fetchSuggestions: handleGitHub,
-  renderOption: renderGithubOption,
+  placeholder:'默认样式的AutoComplete'
 };
+
+export const UserDefined = Template.bind({});
+UserDefined.args = {
+  placeholder:'用户自定义渲染模板',
+  fetchSuggestions: handleGitHub,
+  renderOption: renderGithubOption,
+}
