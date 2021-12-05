@@ -1,5 +1,14 @@
-import React, { useState, ChangeEvent, ReactElement } from "react";
+/*
+ * @Author: shanzhilin
+ * @Date: 2021-12-04 21:20:31
+ * @LastEditors: shanzhilin
+ * @LastEditTime: 2021-12-05 16:17:53
+ */
+import React, { useState, ChangeEvent, ReactElement, useEffect,KeyboardEvent } from "react";
 import Input, { InputProps } from "../Input/input";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import Icon from "../Icon/icon";
+import useDebounce from '../Hooks/useDebounce'
 
 interface DataSourceObject {
   value?: string;
@@ -19,25 +28,19 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     props;
   const [inputValue, setInputValue] = useState(value); // 输入框值
   const [suggestions, setSuggestion] = useState<DataSourceType[]>([]); // 匹配列表
-  // input change 处理方法   
+  const [loading, setLoading] = useState(false); //输入时渲染loading;
+  const debounceValue = useDebounce(inputValue); // 添加防抖的 inputvalue
+  const [heighLightedIndex, setHeighLightedIndex] = useState(-1)
+  // input change 处理方法
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     setInputValue(value);
-    if (value) {
-      const result = fetchSuggestions(value);
-      if (result instanceof Promise) {
-          result.then(data => {
-            // data 断言成数组 因为 Promise传入的是一个DataSourceType类型，返回值无法确定时数组类型，所以需要断言
-            const dataArray =  data as Array<DataSourceType>
-            setSuggestion(dataArray);
-          })
-      }else {
-        setSuggestion(result);
-      }
-    } else {
-      setSuggestion([]);
-    }
   };
+
+  // 快捷键按下时的触发方法
+  const handleKeyDow = (e:KeyboardEvent<HTMLInputElement>) =>{
+      console.log(e)
+  }
   // 选择 具体某一项时的触发方法
   const handelSelect = (item: DataSourceType) => {
     setInputValue(item.value);
@@ -46,7 +49,8 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       onSelect(item);
     }
   };
-  // 根据传入的方法判断是否为用户自定义渲染模板 
+
+  // 根据传入的方法判断是否为用户自定义渲染模板
   const renderTemplate = (item: DataSourceType) => {
     return renderOption ? renderOption(item) : item.value;
   };
@@ -70,9 +74,29 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       </ul>
     );
   };
+
+  useEffect(() => {
+    if (debounceValue) {
+      const result = fetchSuggestions(debounceValue as string);
+      if (result instanceof Promise) {
+        setLoading(true);
+        result.then((data) => {
+          setLoading(false);
+          // data 断言成数组 因为 Promise传入的是一个DataSourceType类型，返回值无法确定时数组类型，所以需要断言
+          const dataArray = data as Array<DataSourceType>;
+          setSuggestion(dataArray);
+        });
+      } else {
+        setSuggestion(result);
+      }
+    } else {
+      setSuggestion([]);
+    }
+  }, [debounceValue]);
   return (
     <div className="auto-complete-content">
-      <Input value={inputValue} onChange={handleChange} {...restProps} />
+      <Input value={inputValue} onChange={handleChange} onKeyDown={handleKeyDow} {...restProps} />
+      {loading && <Icon icon={faSpinner} spin />}
       {suggestions && generatorList()}
     </div>
   );

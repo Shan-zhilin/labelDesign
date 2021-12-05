@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-12-04 15:24:16
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-04 16:35:30
+ * @LastEditTime: 2021-12-05 15:03:45
  */
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { faAdjust,faCoffee } from "@fortawesome/free-solid-svg-icons";
@@ -45,7 +45,6 @@ const ListTemplate: ComponentStory<typeof Icon> = (args) => {
     </>
   );
 };
-
 //  不同样式的组件
 export const DiffTypeIcon = ListTemplate.bind({});
 DiffTypeIcon.args = {
