@@ -2,12 +2,13 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-05 22:52:57
+ * @LastEditTime: 2021-12-06 23:01:04
  */
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 import "./style/index.scss";
 import Button, { ButtonSize, ButtonType } from "./components/Button/button";
 import Menu from "./components/Menu/Menu";
@@ -20,10 +21,24 @@ import Input from './components/Input/input'
 library.add(fas)
 
 function App() {
-  const [show,setShow] = useState(false)
+  const [show,setShow] = useState(false);
+  const [title, setTitle] = useState('')
+  useEffect(() => {
+    // axios.get('https://jsonplaceholder.typicode.com/posts/1').then(resp =>{
+    //   console.log(resp)
+    // })
+    axios.post('https://jsonplaceholder.typicode.com/posts',{
+      title:'lebalD',
+      body:'woshihaoren',
+      testId: '111'
+    }).then(res =>{
+      console.log(res)  
+    })
+  })
   return (
     <div className="App">
       <header className="App-header">
+      <h2>test:{title}</h2>
       <FontAwesomeIcon icon="check-square" />
       <Icon icon="coffee" size='10x'  theme="primary"/>
         <Menu
@@ -45,7 +60,6 @@ function App() {
         <Button onClick={() => {setShow(!show)}}>toogle</Button>
         <Transition
           in={show}
-          timeout={600}
           animation="zoom-in-left"
           addEndListener={() => {}}
           children={
@@ -61,7 +75,6 @@ function App() {
         />
          <Transition
           in={show}
-          timeout={600}
           animation="zoom-in-left"
           wrapper
           addEndListener={() => {}}
