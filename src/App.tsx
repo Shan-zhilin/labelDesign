@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-06 23:01:04
+ * @LastEditTime: 2021-12-07 23:45:40
  */
 import React,{useEffect, useState} from "react";
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,6 +17,7 @@ import SubMenu from "./components/Menu/SubMenu";
 import Icon from './components/Icon/icon'
 import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
+import Upload from './components/Upload/upload'
 
 library.add(fas)
 
@@ -28,18 +29,43 @@ function App() {
     //   console.log(resp)
     // })
     axios.post('https://jsonplaceholder.typicode.com/posts',{
-      title:'lebalD',
+      title:'lebalDesign',
       body:'woshihaoren',
       testId: '111'
     }).then(res =>{
-      console.log(res)  
+      setTitle(res.data.title) 
     })
   })
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
+    const files = e.target.files
+    if (files) {
+      const uploadedFile = files[0]
+      const formData = new FormData()
+      formData.append(uploadedFile.name,uploadedFile)
+      axios.post('https://jsonplaceholder.typicode.com/posts',{
+        headers:{
+            'Content-type':'multipart/form-data'
+        },
+        onUploadProgress: (e:any) => {
+          let percentage = Math.round((e.loaded * 100) / e.total) || 0
+          console.log(percentage)
+      }
+      }).then(res =>{
+        console.log(res)
+      })
+    }
+   
+
+  }
   return (
     <div className="App">
       <header className="App-header">
       <h2>test:{title}</h2>
-      <FontAwesomeIcon icon="check-square" />
+      
+      <input type="file" name="myfile" onChange={handleChange}/>
+
+    <Upload onError={(res) =>{console.log(res)}} onProgress={(p,r) =>{console.log(p)}} action="https://jsonplaceholder.typicode.com/posts" />
+      {/* <FontAwesomeIcon icon="check-square" />
       <Icon icon="coffee" size='10x'  theme="primary"/>
         <Menu
           defaultIndex='0'
@@ -97,14 +123,14 @@ function App() {
         <Input icon="search"  size="sm" style={{width:'300px',top:'30px'}} 
           placeholder="sm size"
         />
-        <Input style={{width:'300px',top:'30px'}} 
+        <Input style={{width:'300px',top:'30px'}}  
           placeholder="前缀"
           prepand='http://'
           append=".com"
           size="lg"
           icon="search"
         />
-        {/* <Button autoFocus>普通</Button>
+       <Button autoFocus>普通</Button>
         <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
           disabled
         </Button>
