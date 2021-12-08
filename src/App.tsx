@@ -2,70 +2,95 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-07 23:45:40
+ * @LastEditTime: 2021-12-08 23:37:57
  */
-import React,{useEffect, useState} from "react";
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import "./style/index.scss";
 import Button, { ButtonSize, ButtonType } from "./components/Button/button";
 import Menu from "./components/Menu/Menu";
 import MenuItem from "./components/Menu/MenuItem";
 import SubMenu from "./components/Menu/SubMenu";
-import Icon from './components/Icon/icon'
-import Transition from './components/Transition/transition'
-import Input from './components/Input/input'
-import Upload from './components/Upload/upload'
+import Icon from "./components/Icon/icon";
+import Transition from "./components/Transition/transition";
+import Input from "./components/Input/input";
+import Upload from "./components/Upload/upload";
 
-library.add(fas)
+library.add(fas);
 
 function App() {
-  const [show,setShow] = useState(false);
-  const [title, setTitle] = useState('')
+  const [show, setShow] = useState(false);
+  const [title, setTitle] = useState("");
   useEffect(() => {
     // axios.get('https://jsonplaceholder.typicode.com/posts/1').then(resp =>{
     //   console.log(resp)
     // })
-    axios.post('https://jsonplaceholder.typicode.com/posts',{
-      title:'lebalDesign',
-      body:'woshihaoren',
-      testId: '111'
-    }).then(res =>{
-      setTitle(res.data.title) 
-    })
-  })
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
-    const files = e.target.files
-    if (files) {
-      const uploadedFile = files[0]
-      const formData = new FormData()
-      formData.append(uploadedFile.name,uploadedFile)
-      axios.post('https://jsonplaceholder.typicode.com/posts',{
-        headers:{
-            'Content-type':'multipart/form-data'
-        },
-        onUploadProgress: (e:any) => {
-          let percentage = Math.round((e.loaded * 100) / e.total) || 0
-          console.log(percentage)
-      }
-      }).then(res =>{
-        console.log(res)
+    axios
+      .post("https://jsonplaceholder.typicode.com/posts", {
+        title: "lebalDesign",
+        body: "woshihaoren",
+        testId: "111",
       })
+      .then((res) => {
+        setTitle(res.data.title);
+      });
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      const uploadedFile = files[0];
+      const formData = new FormData();
+      formData.append(uploadedFile.name, uploadedFile);
+      axios
+        .post("https://jsonplaceholder.typicode.com/posts", {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+          onUploadProgress: (e: any) => {
+            let percentage = Math.round((e.loaded * 100) / e.total) || 0;
+            console.log(percentage);
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
     }
-   
-
+  };
+  // 上传前检测 图片尺寸 返回 bollean 类型
+  const chickFileSize = (file:File) => {
+    if (Math.round(file.size / 1024 / 1024) > 5) {
+      console.log('图片尺寸太大')
+      return false
+    }
+    return true
   }
+  // 返回promise 类型
+  const filePromise = (file: File) => {
+    const newFile = new File([file],'new_name.psd',{type: file.type})
+    return Promise.resolve(newFile)
+  }
+    
   return (
     <div className="App">
       <header className="App-header">
-      <h2>test:{title}</h2>
-      
-      <input type="file" name="myfile" onChange={handleChange}/>
+        <h2>test:{title}</h2>
 
-    <Upload onError={(res) =>{console.log(res)}} onProgress={(p,r) =>{console.log(p)}} action="https://jsonplaceholder.typicode.com/posts" />
-      {/* <FontAwesomeIcon icon="check-square" />
+        <input type="file" name="myfile" onChange={handleChange} />
+
+        <Upload
+          onError={(res) => {
+            console.log(res);
+          }}
+          onProgress={(p, r) => {
+            console.log(p);
+          }}
+          // beforeUpload={filePromise}
+          action="https://jsonplaceholder.typicode.com/posts"
+        />
+        {/* <FontAwesomeIcon icon="check-square" />
       <Icon icon="coffee" size='10x'  theme="primary"/>
         <Menu
           defaultIndex='0'
