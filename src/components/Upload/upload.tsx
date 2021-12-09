@@ -2,15 +2,18 @@
  * @Author: shanzhilin
  * @Date: 2021-12-07 21:45:30
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-09 00:46:57
+ * @LastEditTime: 2021-12-09 21:47:08
  */
-import React, { ChangeEvent, useRef,useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import axios from "axios";
 import Button from "../Button/button";
+import UploadList from "./uploadList";
 
 export interface UploadProps {
   /** 上传地址*/
   action: string;
+  /** 默认上传文件*/
+  defaultUploadList?: UploadFile[];
   /** 上传文件之前的钩子，参数为上传的文件。 若返回 false 或者返回 Promise 且被 reject，则终止上*/
   beforeUpload?: (file: File) => boolean | Promise<File>;
   /** 上传进度*/
@@ -19,19 +22,22 @@ export interface UploadProps {
   onSuccess?: (data: any, file: File) => void;
   /** 上传失败回调事件*/
   onError?: (err: any, filr: File) => void;
-  onChange?:(file:File) => void
+  /** 文件状态改变触发事件*/
+  onChange?: (file: File) => void;
+  /** 用户自定义移除事件*/
+  onRemove?: (file: UploadFile) => void;
 }
 
-export type UploadFileStaus = 'ready' | 'uploading' | 'success' | 'error'
+export type UploadFileStaus = "ready" | "uploading" | "success" | "error";
 export interface UploadFile {
   uid?: string;
-  size?:number;
-  name?:string;
-  status?:UploadFileStaus;
+  size?: number;
+  name?: string;
+  status?: UploadFileStaus;
   percent?: number;
   raw?: File;
-  response?:any;
-  error?:any;
+  response?: any;
+  error?: any;
 }
 
 /**
@@ -40,9 +46,20 @@ export interface UploadFile {
  *
  */
 export const Upload: React.FC<UploadProps> = (props) => {
-  const { action, onProgress, onError, onSuccess, beforeUpload, onChange } = props;
+  const {
+    action,
+    onProgress,
+    onError,
+    onSuccess,
+    beforeUpload,
+    onChange,
+    defaultUploadList,
+    onRemove,
+  } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [fileList, setfileList] = useState<UploadFile[]>([])
+  const [fileList, setfileList] = useState<UploadFile[]>(
+    defaultUploadList || []
+  );
   //点击button 按钮展示 input Uplaod 上传窗口
   const handleClick = () => {
     if (fileInputRef.current) {
@@ -70,37 +87,40 @@ export const Upload: React.FC<UploadProps> = (props) => {
         // 经过beforeUpload 处理过的 filr
         const resultFile = beforeUpload(file);
         if (resultFile && resultFile instanceof Promise) {
-          resultFile.then(processedFile => {
-            post(processedFile)
-          })
-        }else if (resultFile !== false) {
-          post(file)
+          resultFile.then((processedFile) => {
+            post(processedFile);
+          });
+        } else if (resultFile !== false) {
+          post(file);
         }
       }
     });
   };
   // 更新上传文件的 状态
-  const updateFileList = (updataFile:UploadFile,updataObj:Partial<UploadFile>) =>{
-    setfileList(prevList => {
-      return prevList.map(file => {
+  const updateFileList = (
+    updataFile: UploadFile,
+    updataObj: Partial<UploadFile>
+  ) => {
+    setfileList((prevList) => {
+      return prevList.map((file) => {
         if (file.uid === updataFile.uid) {
-          return { ...file, ...updataObj}
-        }else {
-          return file
+          return { ...file, ...updataObj };
+        } else {
+          return file;
         }
-      })
-    })
-  }
+      });
+    });
+  };
   const post = (file: File) => {
     let _file: UploadFile = {
-      uid: Date.now() + 'upload-file',
-      status: 'ready',
+      uid: Date.now() + "upload-file",
+      status: "ready",
       name: file.name,
       size: file.size,
       percent: 0,
-      raw: file
-    }
-    setfileList([_file,...fileList])
+      raw: file,
+    };
+    setfileList([_file, ...fileList]);
     const formData = new FormData();
     formData.append(file.name, file);
     axios
@@ -109,29 +129,37 @@ export const Upload: React.FC<UploadProps> = (props) => {
           "Content-type": "multipart/form-data",
         },
         onUploadProgress: (progressEvent: ProgressEvent) => {
-          let percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total) || 0;
+          let percentage =
+            Math.round((progressEvent.loaded * 100) / progressEvent.total) || 0;
           if (percentage < 100) {
             // 更新文件状态
-            updateFileList(_file,{percent:percentage,status:'uploading'})
-            console.log(fileList)
+            updateFileList(_file, { percent: percentage, status: "uploading" });
+            console.log(fileList);
             onProgress && onProgress(percentage, file);
           }
         },
       })
       .then((res) => {
         // 更新文件状态
-        updateFileList(_file,{status:'success',response:res.data})
+        updateFileList(_file, { status: "success", response: res.data });
         onSuccess && onSuccess(res.data, file);
-        onChange && onChange(file)
+        onChange && onChange(file);
       })
       .catch((err) => {
         // 更新文件状态
-        updateFileList(_file,{status:'error',error:err})
+        updateFileList(_file, { status: "error", error: err });
         onError && onError(err, file);
-        onChange &&  onChange(file)
+        onChange && onChange(file);
       });
   };
-  console.log(fileList)
+
+  // 移除列表中某一项文件
+  const handleRemove = (file: UploadFile) => {
+    setfileList((preList) => {
+      return preList.filter((item) => item.uid !== file.uid);
+    });
+    onRemove && onRemove(file)
+  };
   return (
     <div className="upload-component">
       <Button btnType="primary" onClick={handleClick}>
@@ -146,6 +174,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
         onChange={HandleUploadChange}
         ref={fileInputRef}
       />
+      <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
 };

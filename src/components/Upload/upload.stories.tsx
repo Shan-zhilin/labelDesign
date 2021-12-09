@@ -6,7 +6,7 @@
  */
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Upload from './upload'
+import Upload,{UploadFile} from './upload'
 
 export default {
     title: "Upload",
@@ -24,7 +24,29 @@ export default {
     }
 } as ComponentMeta<typeof Upload>;
 
-
+const testFileList:UploadFile[] = [
+    {
+        uid: '123',
+        size: 1234,
+        name: 'hello.md',
+        status:'uploading',
+        percent: 30
+    },
+    {
+        uid: '124',
+        size: 1234,
+        name: 'xmz.md',
+        status:'success',
+        percent: 30
+    },
+    {
+        uid: '125',
+        size: 1234,
+        name: 'eyiha.md',
+        status:'error',
+        percent: 30
+    }
+]
 const Template: ComponentStory<typeof Upload> = (args) => (
     <Upload {...args} />
 );
@@ -32,4 +54,5 @@ const Template: ComponentStory<typeof Upload> = (args) => (
 export const DefaultUpload = Template.bind({})
 DefaultUpload.args = {
     action:'https://jsonplaceholder.typicode.com/posts',
+    defaultUploadList: testFileList,
 }

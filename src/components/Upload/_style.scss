@@ -1,0 +1,81 @@
+.upload-component {
+    width: 420px;
+}
+.upload-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.upload-list-item {
+    position: relative;
+    -webkit-transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    min-width: 200px;
+
+    &:first-child {
+        margin-top: 10px;
+    }
+
+    &:hover {
+        background-color: $gray-200;
+
+        .file-status {
+            display: none;
+        }
+
+        .file-actions {
+            display: block;
+        }
+
+    }
+
+    .file-name {
+        margin-left: 5px;
+        margin-right: 40px;
+
+        svg {
+            margin-right: 5px;
+            color: $gray-500
+        }
+    }
+
+    .file-name-error {
+        color: $danger;
+
+        svg {
+            color: $danger
+        }
+    }
+
+    .file-name-success {
+        color: $success;
+
+        svg {
+            color: success
+        }
+
+    }
+
+    .file-status {
+        display: block;
+        position: absolute;
+        right: 5px;
+        top: 0;
+        line-height: inherit;
+    }
+
+    .file-actions {
+        display: none;
+        position: absolute;
+        right: 7px;
+        top: 0;
+        line-height: inherit;
+        cursor: pointer;
+    }
+}
