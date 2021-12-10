@@ -6,7 +6,7 @@
 * 🏠TypeScript and React Hooks 作为基础框架 搭建体系结构
 * 👷React-testing-libary 完成单元测试
 * 📕引入storybook 辅助本地测试以及文档自动生成
-* 🌹ass作为Css预处理器，大量运用Sass强大功能
+* 🌹Sass作为CSS预处理器，大量运用Sass强大功能
 * 📦引入第三方组件库 如字体库(react-fontawesome)
 
 #### 安装依赖
