@@ -14,16 +14,30 @@ export interface UploadProps {
   action: string;
   /** 默认上传文件*/
   defaultUploadList?: UploadFile[];
+  /** 用户自定义headers*/
+  headers?: { [key: string]: any };
+  /** 用户自定义文件名*/
+  name?: string;
+  /** 用户自定义上传文件 formData*/
+  data?: { [key: string]: any };
+  /** 表示跨域请求时是否需要使用cookie*/
+  withCredentials?: boolean;
+  /** 可上传的文件类型*/
+  accept?: string;
+  /** 是否可以多选*/
+  multiple?: boolean;
+  /** 拖拽上传*/
+  drag?:boolean; 
   /** 上传文件之前的钩子，参数为上传的文件。 若返回 false 或者返回 Promise 且被 reject，则终止上*/
-  beforeUpload?: (file: File) => boolean | Promise<File>;
+  beforeUpload?: (file: UploadFile) => boolean | Promise<File>;
   /** 上传进度*/
-  onProgress?: (percentagr: number, file: File) => void;
+  onProgress?: (percentagr: number, file: UploadFile) => void;
   /** 上传成功回调事件*/
-  onSuccess?: (data: any, file: File) => void;
+  onSuccess?: (data: any, file: UploadFile) => void;
   /** 上传失败回调事件*/
-  onError?: (err: any, filr: File) => void;
+  onError?: (err: any, filr: UploadFile) => void;
   /** 文件状态改变触发事件*/
-  onChange?: (file: File) => void;
+  onChange?: (file: UploadFile) => void;
   /** 用户自定义移除事件*/
   onRemove?: (file: UploadFile) => void;
 }
@@ -55,6 +69,13 @@ export const Upload: React.FC<UploadProps> = (props) => {
     onChange,
     defaultUploadList,
     onRemove,
+    headers,
+    name,
+    data,
+    withCredentials,
+    accept,
+    multiple,
+    children
   } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileList, setfileList] = useState<UploadFile[]>(
@@ -112,6 +133,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
     });
   };
   const post = (file: File) => {
+    // 当前上传的 file
     let _file: UploadFile = {
       uid: Date.now() + "upload-file",
       status: "ready",
@@ -120,14 +142,27 @@ export const Upload: React.FC<UploadProps> = (props) => {
       percent: 0,
       raw: file,
     };
-    setfileList([_file, ...fileList]);
+    // 将当前上传文件更新到上传列表中
+    // setfileList([_file, ...fileList]);
+    setfileList((prelist) => {
+      return [_file, ...prelist];
+    });
+    // 创建formData对象
     const formData = new FormData();
-    formData.append(file.name, file);
+    formData.append(name || "file", file);
+    // 将用户自定义的formData添加到文件 formData中
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
+    }
     axios
       .post("https://jsonplaceholder.typicode.com/posts/", {
         headers: {
+          ...headers,
           "Content-type": "multipart/form-data",
         },
+        withCredentials,
         onUploadProgress: (progressEvent: ProgressEvent) => {
           let percentage =
             Math.round((progressEvent.loaded * 100) / progressEvent.total) || 0;
@@ -158,25 +193,29 @@ export const Upload: React.FC<UploadProps> = (props) => {
     setfileList((preList) => {
       return preList.filter((item) => item.uid !== file.uid);
     });
-    onRemove && onRemove(file)
+    onRemove && onRemove(file);
   };
   return (
-    <div className="upload-component">
-      <Button btnType="primary" onClick={handleClick}>
-        Upload file
-      </Button>
+    <div className="upload-component" onClick={handleClick}>
+      {children}
       <input
         type="file"
         className="file-input"
         style={{
           display: "none",
         }}
+        accept={accept}
+        multiple={multiple}
         onChange={HandleUploadChange}
         ref={fileInputRef}
       />
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
+};
+
+Upload.defaultProps = {
+  name: "file",
 };
 
 export default Upload;

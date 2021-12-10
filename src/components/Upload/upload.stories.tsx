@@ -7,6 +7,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Upload,{UploadFile} from './upload'
+import Button from "../Button/button";
 
 export default {
     title: "Upload",
@@ -55,4 +56,14 @@ export const DefaultUpload = Template.bind({})
 DefaultUpload.args = {
     action:'https://jsonplaceholder.typicode.com/posts',
     defaultUploadList: testFileList,
+    name:'fileName',
+    data:{
+        'key':'value'
+    },
+    headers:{
+        'X-Powered-By': 'labelDesign'
+    },
+    multiple:true,
+    accept:'.jpg',
+    children: <Button btnType="primary">UploadFile</Button>
 }
