@@ -79,3 +79,23 @@
         cursor: pointer;
     }
 }
+
+.upload-dragger {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 360px;
+    height: 180px;
+    padding: 20px;
+    border: $border-width dashed $border-color;
+    border-radius: $border-radius;
+    cursor: pointer;
+    background-color: $gray-100;
+    &:hover {
+        border: $border-width dashed $blue;
+    }
+    &.is-dragover {
+        border: 2px dashed $blue;
+        background: rgba($blue, 0.2);
+    }
+}

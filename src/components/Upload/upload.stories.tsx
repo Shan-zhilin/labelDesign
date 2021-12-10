@@ -65,5 +65,6 @@ DefaultUpload.args = {
     },
     multiple:true,
     accept:'.jpg',
-    children: <Button btnType="primary">UploadFile</Button>
+    children: '点击或者拖拽到此区域进行上传',
+    drag: true
 }

@@ -8,6 +8,7 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import axios from "axios";
 import Button from "../Button/button";
 import UploadList from "./uploadList";
+import Dragger from "./dragger";
 
 export interface UploadProps {
   /** 上传地址*/
@@ -27,7 +28,7 @@ export interface UploadProps {
   /** 是否可以多选*/
   multiple?: boolean;
   /** 拖拽上传*/
-  drag?:boolean; 
+  drag?: boolean;
   /** 上传文件之前的钩子，参数为上传的文件。 若返回 false 或者返回 Promise 且被 reject，则终止上*/
   beforeUpload?: (file: UploadFile) => boolean | Promise<File>;
   /** 上传进度*/
@@ -75,7 +76,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
     withCredentials,
     accept,
     multiple,
-    children
+    children,
+    drag,
   } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileList, setfileList] = useState<UploadFile[]>(
@@ -163,6 +165,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
           "Content-type": "multipart/form-data",
         },
         withCredentials,
+        // 好像这个属性会被浏览器当作是跨域，上传时并没有触发该钩子函数，需要后端接口配置跨域
+        // 纯前端技术不知道咋解决，哎........真头大
         onUploadProgress: (progressEvent: ProgressEvent) => {
           let percentage =
             Math.round((progressEvent.loaded * 100) / progressEvent.total) || 0;
@@ -197,7 +201,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
   };
   return (
     <div className="upload-component" onClick={handleClick}>
-      {children}
+      {drag ? <Dragger>{children}</Dragger> : children}
       <input
         type="file"
         className="file-input"
