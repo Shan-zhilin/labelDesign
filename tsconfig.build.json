@@ -1,0 +1,13 @@
+{
+    "compilerOptions":{
+        "outDir": "build",
+        "module": "esnext",
+        "target": "ES5",
+        "declaration": true,
+        "jsx": "react",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports":true
+    },
+    "include": ["src"], //需要编译的文件
+    "exclude": ["src/**/*.test.tsx","src/**/*.stories.tsx"]  //不希望编译的文件
+}
