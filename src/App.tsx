@@ -68,10 +68,10 @@ function App() {
     return true
   }
   // 返回promise 类型
-  const filePromise = (file: File) => {
-    const newFile = new File([file],'new_name.psd',{type: file.type})
-    return Promise.resolve(newFile)
-  }
+  // const filePromise = (file: File) => {
+  //   const newFile = new File([file],'new_name.psd',{type: file.type})
+  //   return Promise.resolve(newFile)
+  // }
     
   return (
     <div className="App">
