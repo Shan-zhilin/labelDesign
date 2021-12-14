@@ -1,3 +1,9 @@
+<!--
+ * @Author: shanzhilin
+ * @Date: 2021-12-15 00:35:33
+ * @LastEditors: shanzhilin
+ * @LastEditTime: 2021-12-15 00:39:39
+-->
 # React + TS 组件库
 
 写在前面：学习 [React个人组件库](https://coding.imooc.com/class/428.html) 总结所作，它不一定能提升你的业务能力，但是它一定可以让你对 React with TS 开发模式有更加深刻的体验，会让你对React 有着更加深刻的认识。
