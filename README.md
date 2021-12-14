@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-12-15 00:35:33
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-15 00:39:39
+ * @LastEditTime: 2021-12-15 01:01:30
 -->
 # React + TS 组件库
 
@@ -17,15 +17,15 @@
 
 #### 安装依赖
 ```js
-    yarn
+    npm install
 ```
 
 #### 启动项目
 ```
-    yarn start
+    npm start
 ```
 
 #### 启动 storybook
 ```
-    yarn storybook
+    npm run storybook
 ```
