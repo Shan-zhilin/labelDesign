@@ -83,6 +83,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
   const [fileList, setfileList] = useState<UploadFile[]>(
     defaultUploadList || []
   );
+  const defaultChildren = children || <Button btnType="primary">Click to upload</Button>
   //点击button 按钮展示 input Uplaod 上传窗口
   const handleClick = () => {
     if (fileInputRef.current) {
@@ -201,12 +202,12 @@ export const Upload: React.FC<UploadProps> = (props) => {
   };
   return (
     <div className="upload-component" onClick={handleClick}>
-      {drag ? <Dragger onFile={(files) => {uploadFiles(files)}}>{children}</Dragger> : children}
+      {drag ? <Dragger onFile={(files) => {uploadFiles(files)}}>{defaultChildren}</Dragger> : defaultChildren}
       <input
         type="file"
         className="file-input"
         style={{
-          display: "none",
+          'display': 'none'
         }}
         accept={accept}
         multiple={multiple}
