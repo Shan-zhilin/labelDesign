@@ -2,12 +2,11 @@
  * @Author: shanzhilin
  * @Date: 2021-12-07 21:45:50
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-07 23:04:07
+ * @LastEditTime: 2021-12-15 21:08:59
  */
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Upload,{UploadFile} from './upload'
-import Button from "../Button/button";
 
 export default {
     title: "Upload",

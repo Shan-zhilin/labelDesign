@@ -1,11 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AutoComplete, DataSourceType } from "./autoComplete";
 
-interface LakerPlayerProps {
-  value?: string;
-  number?: number;
-}
-
 interface GitHubProps {
   login?:string,
   url?:string,
@@ -22,84 +17,6 @@ export default {
     },
   },
 } as ComponentMeta<typeof AutoComplete>;
-
-const lakers = [
-  "bradley",
-  "pope",
-  "cook",
-  "caruso",
-  "cousins",
-  "james",
-  "AD",
-  "green",
-  "howard",
-  "kuzma",
-  "McGee",
-  "rando",
-];
-const lakerswithnumber = [
-  {
-    value: "bradley",
-    number: 1,
-  },
-  {
-    value: "pope",
-    number: 2,
-  },
-  {
-    value: "cook",
-    number: 3,
-  },
-  {
-    value: "caruso",
-    number: 4,
-  },
-  {
-    value: "cousins",
-    number: 5,
-  },
-  {
-    value: "james",
-    number: 6,
-  },
-  {
-    value: "AD",
-    number: 7,
-  },
-  {
-    value: "green",
-    number: 8,
-  },
-  {
-    value: "howard",
-    number: 9,
-  },
-  {
-    value: "kuzma",
-    number: 10,
-  },
-  {
-    value: "McGee",
-    number: 11,
-  },
-  {
-    value: "rando",
-    number: 12,
-  },
-];
-// 单个类型 触发方法
-const handleFetch = (query: string) => {
-  return lakers
-    .filter((str) => str.includes(query))
-    .map((item) => {
-      return { value: item };
-    });
-};
-
-// 复合类型数据结构触发方法
-const handleFetchWithObject = (query: string) => {
-  return lakerswithnumber.filter((palyer) => palyer.value.includes(query));
-};
 
 // 调用github user search接口
 const handleGitHub = (query: string) => {

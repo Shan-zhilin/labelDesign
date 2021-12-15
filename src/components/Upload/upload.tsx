@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-12-07 21:45:30
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-09 21:47:08
+ * @LastEditTime: 2021-12-15 21:12:37
  */
 import React, { ChangeEvent, useRef, useState } from "react";
 import axios from "axios";
@@ -160,7 +160,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
       });
     }
     axios
-      .post("https://jsonplaceholder.typicode.com/posts/", {
+      .post(action, {
         headers: {
           ...headers,
           "Content-type": "multipart/form-data",

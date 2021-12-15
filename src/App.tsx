@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-10-09 14:54:07
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-08 23:37:57
+ * @LastEditTime: 2021-12-15 21:26:35
  */
 import React, { useEffect, useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -59,14 +59,7 @@ function App() {
         });
     }
   };
-  // 上传前检测 图片尺寸 返回 bollean 类型
-  const chickFileSize = (file:File) => {
-    if (Math.round(file.size / 1024 / 1024) > 5) {
-      console.log('图片尺寸太大')
-      return false
-    }
-    return true
-  }
+
   // 返回promise 类型
   // const filePromise = (file: File) => {
   //   const newFile = new File([file],'new_name.psd',{type: file.type})
@@ -90,7 +83,7 @@ function App() {
           // beforeUpload={filePromise}
           action="https://jsonplaceholder.typicode.com/posts"
         />
-        {/* <FontAwesomeIcon icon="check-square" />
+        <FontAwesomeIcon icon="check-square" />
       <Icon icon="coffee" size='10x'  theme="primary"/>
         <Menu
           defaultIndex='0'
@@ -156,30 +149,30 @@ function App() {
           icon="search"
         />
        <Button autoFocus>普通</Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large} disabled>
+        <Button btnType="primary" size="lg" disabled>
           disabled
         </Button>
         <Button
-          btnType={ButtonType.Success}
-          size={ButtonSize.Large}
+          btnType="success"
+          size="lg"
           onClick={() => {
             alert(111);
           }}
         >
           success
         </Button>
-        <Button btnType={ButtonType.Warning} size={ButtonSize.Large}>
+        <Button btnType="warning" size="lg">
           warning
         </Button>
-        <Button btnType={ButtonType.Info} size={ButtonSize.Large}>
+        <Button btnType="info" size="lg">
           info
         </Button>
-        <Button btnType={ButtonType.Link} href="https://www.baidu.com">
+        <Button btnType="default" href="https://www.baidu.com">
           普通连接
         </Button>
-        <Button btnType={ButtonType.Link} href="https://www.baidu.com" disabled>
+        <Button btnType="link" href="https://www.baidu.com" disabled>
           禁用连接
-        </Button> */}
+        </Button>
       </header>
     </div>
   );
