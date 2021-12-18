@@ -2,7 +2,7 @@
  * @Author: shanzhilin
  * @Date: 2021-12-04 21:20:31
  * @LastEditors: shanzhilin
- * @LastEditTime: 2021-12-05 23:30:15
+ * @LastEditTime: 2021-12-18 23:10:24
  */
 import React, {
   useState,
@@ -33,6 +33,11 @@ export interface AutoCompleteProps extends Omit<InputProps, "onSelect"> {
   renderOption?: (item: DataSourceType) => ReactElement;
 }
 
+/**
+ *> ## **引用方式**
+ * **import AutoComplete from 'labelDesign'**
+ * 
+*/
 export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const { fetchSuggestions, onSelect, value, renderOption, ...restProps } =
     props;
